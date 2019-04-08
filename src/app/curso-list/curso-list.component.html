@@ -1,0 +1,43 @@
+<mat-card>
+  <mat-card-title>Cursos</mat-card-title>
+  <mat-card-content>
+    <table mat-table [dataSource]="cursos" class="mat-elevation-z8">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Id. </th>
+        <td mat-cell *matCellDef="let curso"> {{curso.id}} </td>
+      </ng-container>
+      <ng-container matColumnDef="codigo">
+        <th mat-header-cell *matHeaderCellDef> Código </th>
+        <td mat-cell *matCellDef="let curso"> {{curso.codigo}} </td>
+      </ng-container>
+      <ng-container matColumnDef="descripcion">
+        <th mat-header-cell *matHeaderCellDef> Descripción </th>
+        <td mat-cell *matCellDef="let curso"> {{curso.descripcion}} </td>
+      </ng-container>
+      <ng-container matColumnDef="anio">
+        <th mat-header-cell *matHeaderCellDef> Año </th>
+        <td mat-cell *matCellDef="let curso"> {{curso.anio}} </td>
+      </ng-container>
+      <ng-container matColumnDef="activo">
+        <th mat-header-cell *matHeaderCellDef> Activo </th>
+        <td mat-cell *matCellDef="let curso"><span *ngIf="curso.active; then active; else notActive"></span></td>
+      </ng-container>
+      <ng-container matColumnDef="editar">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let curso"> <a mat-raised-button color="accent"
+            [routerLink]="['/curso-edit', curso.id]">Editar</a> </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card-content>
+  <button mat-fab color="primary" [routerLink]="['/curso-add']">Agregar</button>
+</mat-card>
+
+<ng-template #active>
+  Activo
+</ng-template>
+<ng-template #notActive>
+  No activo
+</ng-template>

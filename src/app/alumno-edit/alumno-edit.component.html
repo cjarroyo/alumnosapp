@@ -1,0 +1,66 @@
+<mat-card>
+  <form #alumnoForm="ngForm" (ngSubmit)="save()">
+    <mat-card-header>
+      <mat-card-title>
+        <h2>{{alumno.id ? 'Editar' : 'Agregar'}} Alumno</h2>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field>
+        <input matInput placeholder="Nombres" [(ngModel)]="alumno.nombres" required name="nombres" #alumno.nombres>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-content>
+      <mat-form-field>
+        <input matInput placeholder="Apellidos" [(ngModel)]="alumno.apellidos" required name="apellidos"
+          #alumno.apellidos>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-content>
+      <mat-form-field>
+        <input matInput placeholder="Fecha de nacimiento (dd/mm/yyyy)" [(ngModel)]="alumno.fechaNacimiento" required
+          name="fechaNacimiento" #alumno.fechaNacimiento>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-content>
+      <mat-form-field>
+        <input matInput placeholder="Dirección" [(ngModel)]="alumno.direccion" required name="direccion"
+          #alumno.direccion>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-content>
+      <mat-form-field>
+        <input matInput placeholder="Email" type="email" required [(ngModel)]="alumno.email" name="email" #alumno.email>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-content>
+      <mat-form-field>
+        <input matInput placeholder="Telefono" [(ngModel)]="alumno.telefono" required name="telefono" #alumno.telefono>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-content>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <h6>Cursos Activos enrolados o no</h6>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-selection-list #list [(ngModel)]="cursosSeleccionados" [ngModelOptions]="{standalone: true}">
+            <mat-list-option *ngFor="let curso of cursosActivos" [value]="curso.id">
+              ID: {{curso.id}} - Codigo: {{curso.codigo}} - Nombre: {{curso.descripcion}}
+            </mat-list-option>
+          </mat-selection-list>
+        </mat-card-content>
+      </mat-card>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!alumnoForm.form.valid">Grabar</button>
+      <button mat-raised-button color="warn" (click)="remove(alumno.id)" *ngIf="alumno.id"
+        type="button">Eliminar</button>
+      <a mat-raised-button color="accent" routerLink="/alumno-list">Cancelar</a>
+    </mat-card-actions>
+    <mat-card-footer>
+    </mat-card-footer>
+  </form>
+</mat-card>
